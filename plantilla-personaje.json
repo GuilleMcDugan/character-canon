@@ -1,0 +1,163 @@
+{
+  "schema_version": "character-canon/1.0",
+
+  "meta": {
+    "character_id": "nombre-personaje-proyecto",
+    "character_name": "Nombre completo / Alias",
+    "version": "v0.1",
+    "created_for": "Nombre del proyecto",
+    "canon_image": "ARCHIVO de la imagen canon CONGELADA. No se regenera nunca.",
+    "canon_note": "De qué fotograma procede el canon y por qué se eligió.",
+    "core_rule": "La regla esencial del personaje en una sola frase."
+  },
+
+  "dramatic_function": {
+    "summary": "Qué papel cumple el personaje en la historia.",
+    "emotional_axis": ["eje 1", "eje 2", "eje 3"],
+    "do_not_frame_as": ["lo que el personaje NO es", "estereotipo a evitar"]
+  },
+
+  "identity_lock": {
+    "_comment": "LO QUE NUNCA CAMBIA. Cada campo, un ancla DURA: proporciones, posiciones, valores absolutos. Evitar adjetivos puramente relativos.",
+    "age_apparent": "rango de edad aparente",
+    "visual_origin": "origen visual concreto",
+    "face": {
+      "shape": "forma del rostro con proporción (ej: ovalado, tercio inferior corto)",
+      "proportions": "relación entre tercios faciales, anchuras",
+      "cheekbones": "altura, proyección — cuantificado",
+      "jaw": "definición y ángulo — cuantificado",
+      "chin": "forma y proyección",
+      "nose": "puente, longitud relativa de tercios, base — cuantificado",
+      "lips": "grosor y proporción",
+      "distinctive_marks": "AL MENOS UNO: asimetría, lunar, cicatriz, forma de ceja. Crítico si la cara es genérica.",
+      "expression_default": "expresión en reposo"
+    },
+    "eyes": {
+      "shape": "forma",
+      "color": "color descriptivo",
+      "color_hex": "#000000",
+      "spacing": "separación interocular (ancha / media / estrecha)",
+      "notes": "lo que los ojos nunca deben ser"
+    },
+    "skin": {
+      "tone": "tono",
+      "tone_hex": "#000000",
+      "texture": "textura, poros, imperfecciones reales",
+      "distinctive": "pecas, marcas — lo infrecuente, que ancla"
+    },
+    "hair": {
+      "color": "color",
+      "color_hex": "#000000",
+      "length": "longitud",
+      "texture": "tipo de rizo/liso, cuantificado",
+      "hairline": "nacimiento del pelo, raya",
+      "style_default": "peinado por defecto",
+      "notes": "lo que el pelo nunca debe ser"
+    },
+    "facial_hair": {
+      "type": "tipo",
+      "description": "descripción",
+      "notes": "función o regla"
+    },
+    "body": {
+      "height_cm": 0,
+      "build": "complexión — cuantificada",
+      "posture_default": "postura por defecto"
+    },
+    "hands": {
+      "description": "descripción de las manos",
+      "use": "qué hacen habitualmente"
+    },
+    "constant_items": [
+      "elemento que aparece SIEMPRE 1",
+      "elemento que aparece SIEMPRE 2"
+    ]
+  },
+
+  "hard_anchors": {
+    "_comment": "Las 4-7 anclas NO NEGOCIABLES. Se repiten en CADA prompt. La lista corta que salva la consistencia, sobre todo en caras genéricas. Incluir al menos un rasgo distintivo concreto.",
+    "list": [
+      "ancla dura 1",
+      "ancla dura 2",
+      "ancla dura 3",
+      "ancla dura 4",
+      "ancla dura 5"
+    ]
+  },
+
+  "camera_grammar": {
+    "_comment": "Capa central — en cine la cámara es parte de la identidad del personaje. Hereda el estilo de la biblia visual del proyecto.",
+    "lens": "focal y diafragma fijos del personaje (ej: 85mm f/1.8)",
+    "film_profile": "respuesta de película o sensor, grano, grado de color",
+    "lighting_grammar": "esquema de luz comprometido — de dónde viene la luz clave, fill, contraste",
+    "eyeline": "hacia dónde mira en plano/contraplano",
+    "framing": "formato (ej: 9:16, 2.39:1)",
+    "camera_prompt_injection": "frase lista para pegar en el prompt con la gramática de cámara"
+  },
+
+  "voice_lock": {
+    "_comment": "La voz también es canon: deriva si se regenera. Se bloquea igual que el rostro. Capa contenida.",
+    "platform": "plataforma de voz (ej: ElevenLabs)",
+    "voice_id": "ID de la voz",
+    "voice_id_locked": true,
+    "parameters": {
+      "stability": 0.0,
+      "similarity": 0.0,
+      "style": 0.0
+    },
+    "naming_convention": "convención de nombrado de los archivos de audio",
+    "note": "Voice ID bloqueado. No se cambia sin autorización explícita."
+  },
+
+  "states": {
+    "_comment": "LO QUE VARÍA POR ESCENA. La identidad NO se redefine aquí: se hereda de identity_lock. Cada estado solo añade lo que cambia. Usar micro-expresiones, no emociones genéricas.",
+    "estado_1": {
+      "state_id": "personaje-estado-1",
+      "used_in_planes": ["01", "02"],
+      "physical_markers": ["marcador físico que cambia en este estado"],
+      "emotional_markers": ["micro-expresión concreta, no emoción genérica"],
+      "wardrobe": "qué bloque de vestuario usa",
+      "positive_prompt": "prompt del estado — SIN redefinir la cara",
+      "negative_prompt": "negativo específico del estado"
+    }
+  },
+
+  "wardrobe": {
+    "_comment": "Vestuario por bloque. Separado de la identidad: la ropa cambia, la cara no.",
+    "bloque_1": {
+      "description": "descripción del vestuario",
+      "condition": "estado de la ropa",
+      "palette": ["#000000"]
+    }
+  },
+
+  "continuity_lock_phrase": "Frase fija de una línea que abre todos los prompts y resume la identidad. Terminar con: 'match the canon image exactly, do not average the face'.",
+
+  "global_negative_prompt": "Todo lo que el personaje NUNCA debe ser. Errores recurrentes del modelo con este personaje.",
+
+  "plane_state_map": {
+    "01": "estado_1",
+    "02": "estado_1"
+  },
+
+  "prompt_usage_notes": {
+    "recommended_stack": [
+      "1. continuity_lock_phrase",
+      "2. hard_anchors (las 4-7, siempre)",
+      "3. positive_prompt del estado segun plane_state_map",
+      "4. accion y entorno del plano + micro-expresion concreta",
+      "5. camera_grammar (lente, luz, formato)",
+      "6. global_negative_prompt + negative_prompt del estado",
+      "7. estilo visual de la biblia del proyecto",
+      "8. si el modelo lo permite: inyectar canon_image como referencia"
+    ],
+    "pipeline_notes": [
+      "Boca cerrada en las imagenes base si habra lipsync.",
+      "Mantener direccion de luz entre planos contiguos salvo corte explicito."
+    ],
+    "most_common_failure_modes": [
+      "modo de fallo conocido de este personaje 1",
+      "modo de fallo conocido de este personaje 2"
+    ]
+  }
+}
