@@ -7,8 +7,8 @@ Caso real: producción de un cortometraje de ficción.
 
 ## El síntoma
 
-En el tráiler hay varios personajes recurrentes. Cuatro de ellos —entre ellos
-dos de ellos— se replicaron plano a plano con consistencia. Uno, Daniel, no.
+En el tráiler hay varios personajes recurrentes. Casi todos se replicaron plano
+a plano con consistencia. Uno, Daniel, no.
 
 La descripción exacta del fallo, en palabras del director: *"Era Daniel en todos
 los planos — reconocible, a veces más expresivo que nunca — pero nunca el mismo

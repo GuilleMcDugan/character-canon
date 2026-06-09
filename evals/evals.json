@@ -1,0 +1,47 @@
+{
+  "skill_name": "character-canon",
+  "description": "Casos de prueba del comportamiento de character-canon. Cada caso evalúa que la skill aplique su doctrina (congelar canon, endurecer anclas, separar identidad de estado) y no solo describa al personaje. Assertions cualitativas: se gradúan a ojo o con un juez LLM comparando la salida contra los criterios.",
+  "evals": [
+    {
+      "id": 0,
+      "name": "construir-canon-desde-material",
+      "prompt": "Tengo un personaje, Sara, para un corto de ciencia ficción. He generado como ocho imágenes distintas de ella en los últimos meses, todas un poco diferentes. Voy a rodar unos 40 planos con ella. Créame la ficha de canon para que sea siempre la misma. Es una mujer de unos 30, cara bastante común: pelo castaño liso, ojos marrones, sin rasgos llamativos.",
+      "expected_output": "La skill NO genera un personaje nuevo. Aplica el método: (1) detecta que las 8 imágenes son un linaje de 'primos', no una persona; (2) obliga a ELEGIR UN fotograma como canon y congelarlo (no regenerar); (3) avisa de que es una cara genérica y por tanto necesita MÁS anclas duras y al menos un rasgo distintivo concreto; (4) rellena la plantilla separando identity_lock (lo que nunca cambia) de states (lo que varía); (5) propone hard_anchors cuantificadas, no adjetivos blandos.",
+      "files": [],
+      "assertions": [
+        {"text": "Insiste en elegir UN fotograma como canon y congelarlo (no seguir regenerando ni promediar las 8 versiones)", "type": "qualitative"},
+        {"text": "Nombra el riesgo de cara genérica y prescribe más anclas duras + al menos un rasgo distintivo concreto para compensarlo", "type": "qualitative"},
+        {"text": "Propone hard_anchors con proporciones/posiciones/valores absolutos, NO con términos relativos ('media', 'suave', 'normal')", "type": "qualitative"},
+        {"text": "Separa identity_lock (invariante) de states (lo que cambia por escena); no redefine la cara en cada estado", "type": "qualitative"},
+        {"text": "No 'inventa' una cara nueva ni describe psicología/arco dramático (eso sería character-builder); se centra en identidad VISUAL/sonora", "type": "qualitative"}
+      ]
+    },
+    {
+      "id": 1,
+      "name": "diagnosticar-deriva-identidad",
+      "prompt": "Mi personaje protagonista me sale reconocible en todos los planos pero nunca es EXACTAMENTE el mismo: algo cambia ligeramente cada vez. He iterado los planos y no se arregla. Tengo varias versiones de su imagen base de distintos momentos del proyecto. ¿Qué está pasando y cómo lo arreglo?",
+      "expected_output": "Diagnóstico que reproduce el caso de caso-deriva-identidad.md: (1) distingue consistencia de RECONOCIMIENTO vs de IDENTIDAD y sitúa el fallo en identidad; (2) identifica la causa raíz como un LINAJE de canones (varias bases = personas emparentadas distintas), no un mal prompt ni la semilla; (3) la solución no es iterar más planos sino CERRAR el canon: elegir un fotograma, congelarlo, endurecer anclas; (4) recomienda verificar la causa con quien produjo los planos, no asumirla.",
+      "files": [],
+      "assertions": [
+        {"text": "Distingue consistencia de reconocimiento vs consistencia de identidad y ubica el fallo en la identidad", "type": "qualitative"},
+        {"text": "Identifica la causa raíz como linaje de canones (múltiples imágenes base = primos), no como problema de prompt o de semilla", "type": "qualitative"},
+        {"text": "Descarta explícitamente la semilla como ancla y/o desmonta la idea de que iterar planos lo resuelve", "type": "qualitative"},
+        {"text": "Prescribe congelar UN canon y endurecer anclas como solución, no regenerar la base", "type": "qualitative"},
+        {"text": "Aplica método de diagnóstico (verificar la causa con quien produjo, no asumirla)", "type": "qualitative"}
+      ]
+    },
+    {
+      "id": 2,
+      "name": "endurecer-anclas-blandas",
+      "prompt": "Revisa este bloque de la ficha de mi personaje y dime si va a mantener la cara: 'rostro: nariz de longitud media, pómulos suaves medio-bajos, mandíbula de definición media, ojos oscuros, complexión normal'. Es un hombre joven mediterráneo, sin nada muy llamativo.",
+      "expected_output": "La skill detecta que TODO el bloque son anclas blandas (relativas, promediables) y que en una cara genérica eso es 'permiso para derivar'. Reescribe cada rasgo como ancla dura con proporciones/valores absolutos (puente recto y tercio nasal corto, hex del color de ojos, etc.) y señala la ausencia de un rasgo distintivo, proponiendo añadir o nombrar al menos uno.",
+      "files": [],
+      "assertions": [
+        {"text": "Identifica que 'media', 'suaves', 'definición media', 'oscuros', 'normal' son anclas BLANDAS que el modelo promedia", "type": "qualitative"},
+        {"text": "Reescribe al menos 3 rasgos como anclas duras con proporciones, posiciones o valores absolutos (incluido hex de color cuando aplica)", "type": "qualitative"},
+        {"text": "Detecta la falta de un rasgo distintivo y propone nombrar/añadir al menos uno, dado que la cara es genérica", "type": "qualitative"},
+        {"text": "No se limita a validar 'está bien'; señala que tal cual NO mantendrá la cara", "type": "qualitative"}
+      ]
+    }
+  ]
+}

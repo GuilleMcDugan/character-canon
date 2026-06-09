@@ -1,6 +1,6 @@
 ---
 name: character-canon
-description: Construye y mantiene el canon visual y sonoro de un personaje de cine generado con IA. Úsala para crear la ficha JSON de un personaje protagónico o recurrente, para diagnosticar por qué un personaje "cambia de cara" entre planos, o para blindar la consistencia de identidad de cara a una producción de varios planos o escenas. Pensada para cine generativo: imagen, vídeo y voz.
+description: Construye y mantiene el canon visual y sonoro de un personaje de cine generado con IA —rostro, cuerpo, voz, gramática de cámara— para que siga siendo exactamente el mismo a lo largo de decenas de planos. Úsala cuando el usuario diga "crea la ficha de canon de [personaje]", "ficha JSON del personaje", "este personaje cambia de cara entre planos", "se me deriva la cara", "blinda la consistencia de [personaje]", "por qué no es el mismo en cada plano", o pegue material de un personaje y pida congelar o diagnosticar su identidad para una producción de varios planos. También en inglés: "build a character canon", "my character's face keeps changing", "lock character identity across shots". NO la uses para diseñar la psicología o el arco dramático de un personaje desde cero (eso es character-builder), ni para fijar el estilo visual global del proyecto (eso es cine-dna): character-canon congela la identidad VISUAL y SONORA de un personaje ya existente. Cine generativo: imagen, vídeo y voz.
 ---
 
 # character-canon
