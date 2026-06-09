@@ -32,15 +32,15 @@
     },
     {
       "id": 2,
-      "name": "endurecer-anclas-blandas",
-      "prompt": "Revisa este bloque de la ficha de mi personaje y dime si va a mantener la cara: 'rostro: nariz de longitud media, pómulos suaves medio-bajos, mandíbula de definición media, ojos oscuros, complexión normal'. Es un hombre joven mediterráneo, sin nada muy llamativo.",
-      "expected_output": "La skill detecta que TODO el bloque son anclas blandas (relativas, promediables) y que en una cara genérica eso es 'permiso para derivar'. Reescribe cada rasgo como ancla dura con proporciones/valores absolutos (puente recto y tercio nasal corto, hex del color de ojos, etc.) y señala la ausencia de un rasgo distintivo, proponiendo añadir o nombrar al menos uno.",
+      "name": "trampa-regenerar-base",
+      "prompt": "Mi protagonista deriva un poco de cara entre planos — yo lo noto al revisar. Pero enseñé el tráiler montado a unas 20 personas y nadie notó nada raro. Estreno en dos semanas. Para arreglarlo se me ocurre regenerar los 30 planos del personaje partiendo de una imagen base nueva y mejorada que me acabo de hacer, que queda más guapa y más nítida que la vieja. ¿Lo hago así, o cómo lo enfoco con el tiempo que tengo?",
+      "expected_output": "La skill NO da la respuesta servicial-pero-errónea de 'sí, regenera desde una base mejor'. (1) Distingue reconocimiento vs identidad: si 20 personas no notaron nada, el tráiler funciona para el público y es publicable — la deriva la ve el director, no la sala; no urge rehacer nada para el estreno. (2) DESACONSEJA regenerar desde una base nueva 'mejorada': eso crea otra prima del linaje y empeora la consistencia (regla de oro: el enemigo no es el prompt, es regenerar el canon; 'más guapa' es la trampa de 'me gusta más' en vez de '¿es el mismo?'). (3) Prescribe lo contrario: elegir UN fotograma YA existente como canon, congelarlo y endurecer anclas, como arreglo hacia adelante — no para estos 30 planos.",
       "files": [],
       "assertions": [
-        {"text": "Identifica que 'media', 'suaves', 'definición media', 'oscuros', 'normal' son anclas BLANDAS que el modelo promedia", "type": "qualitative"},
-        {"text": "Reescribe al menos 3 rasgos como anclas duras con proporciones, posiciones o valores absolutos (incluido hex de color cuando aplica)", "type": "qualitative"},
-        {"text": "Detecta la falta de un rasgo distintivo y propone nombrar/añadir al menos uno, dado que la cara es genérica", "type": "qualitative"},
-        {"text": "No se limita a validar 'está bien'; señala que tal cual NO mantendrá la cara", "type": "qualitative"}
+        {"text": "Distingue reconocimiento vs identidad y concluye que, al no notarlo el público, los 30 planos actuales son publicables — NO urge rehacerlos para el estreno en dos semanas", "type": "qualitative"},
+        {"text": "DESACONSEJA explícitamente regenerar partiendo de una base nueva 'mejorada': crea otra prima del linaje y empeora la consistencia (regla de oro)", "type": "qualitative"},
+        {"text": "Detecta la trampa del 'me gusta más / más guapa' frente a la vara correcta '¿es el mismo?'; mejorar el canon = romperlo", "type": "qualitative"},
+        {"text": "Prescribe la alternativa correcta: congelar UN fotograma YA existente + endurecer anclas hacia adelante, en vez de regenerar. NO responde 'sí, regenera con la base mejor'", "type": "qualitative"}
       ]
     }
   ]
