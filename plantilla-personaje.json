@@ -8,7 +8,8 @@
     "created_for": "Nombre del proyecto",
     "canon_image": "ARCHIVO de la imagen canon CONGELADA. No se regenera nunca.",
     "canon_note": "De qué fotograma procede el canon y por qué se eligió.",
-    "core_rule": "La regla esencial del personaje en una sola frase."
+    "core_rule": "La regla esencial del personaje en una sola frase.",
+    "context_profile": "cinema | podcast | ugc — ajusta camera_grammar y la selección de realism_anchors. No cambia la identidad."
   },
 
   "dramatic_function": {
@@ -131,6 +132,24 @@
     }
   },
 
+  "realism_anchors": {
+    "_comment": "Motor de Realismo (Paso 5). Selección de anclas de fotorrealismo para este personaje. Mínimo 6; 10 si context_profile es 'ugc'. Misma selección en todos los planos. Las manos (nail_detail) y la joyería (jewelry_physics) son los fallos más visibles: priorízalas si aparecen.",
+    "minimum_required": 6,
+    "selected": [
+      "skin_pores",
+      "uneven_skin_tone",
+      "lighting_imperfection",
+      "camera_artifacts",
+      "fabric_texture",
+      "stray_hairs"
+    ],
+    "available": [
+      "skin_pores", "stray_hairs", "under_eye_texture", "uneven_skin_tone",
+      "fabric_texture", "environmental_noise", "lighting_imperfection",
+      "camera_artifacts", "nail_detail", "jewelry_physics"
+    ]
+  },
+
   "continuity_lock_phrase": "Frase fija de una línea que abre todos los prompts y resume la identidad. Terminar con: 'match the canon image exactly, do not average the face'.",
 
   "global_negative_prompt": "Todo lo que el personaje NUNCA debe ser. Errores recurrentes del modelo con este personaje.",
@@ -142,18 +161,18 @@
 
   "prompt_usage_notes": {
     "recommended_stack": [
-      "1. continuity_lock_phrase",
-      "2. hard_anchors (las 4-7, siempre)",
-      "3. positive_prompt del estado segun plane_state_map",
-      "4. accion y entorno del plano + micro-expresion concreta",
-      "5. camera_grammar (lente, luz, formato)",
-      "6. global_negative_prompt + negative_prompt del estado",
-      "7. estilo visual de la biblia del proyecto",
-      "8. si el modelo lo permite: inyectar canon_image como referencia"
+      "Capa 1 — continuity_lock_phrase + hard_anchors (las 4-7, en orden fijo)",
+      "Capa 2 — micro-expresion concreta del estado (no emocion generica) + eyeline",
+      "Capa 3 — accion y entorno del plano + luz ambiente",
+      "Capa 4 — camera_grammar (lente, luz, formato) segun context_profile",
+      "Capa 5 — inyeccion de realismo: realism_anchors (>=6, 10 si ugc)",
+      "Capa 6 — global_negative_prompt + negative_prompt del estado (+ negativos de boca si lipsync)",
+      "Extra — si el modelo lo permite: inyectar canon_image como referencia visual"
     ],
     "pipeline_notes": [
-      "Boca cerrada en las imagenes base si habra lipsync.",
-      "Mantener direccion de luz entre planos contiguos salvo corte explicito."
+      "Boca cerrada y manos fuera del ovalo facial en las imagenes base si habra lipsync.",
+      "Mantener direccion de luz entre planos contiguos salvo corte explicito.",
+      "El estilo visual GLOBAL del proyecto (paleta, grano) es cine-dna, no esta ficha."
     ],
     "most_common_failure_modes": [
       "modo de fallo conocido de este personaje 1",

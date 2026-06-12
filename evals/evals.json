@@ -42,6 +42,32 @@
         {"text": "Detecta la trampa del 'me gusta más / más guapa' frente a la vara correcta '¿es el mismo?'; mejorar el canon = romperlo", "type": "qualitative"},
         {"text": "Prescribe la alternativa correcta: congelar UN fotograma YA existente + endurecer anclas hacia adelante, en vez de regenerar. NO responde 'sí, regenera con la base mejor'", "type": "qualitative"}
       ]
+    },
+    {
+      "id": 3,
+      "name": "personaje-parece-cgi",
+      "prompt": "Tengo a mi personaje, Mara, y es siempre la misma cara entre planos, eso lo tengo resuelto. El problema es que parece de plástico, como un render 3D, se nota a la legua que es IA: la piel demasiado lisa, la luz perfecta, todo impecable. ¿Cómo consigo que parezca una persona real fotografiada?",
+      "expected_output": "La skill identifica que el problema NO es de identidad/consistencia (eso ya está) sino de FOTORREALISMO, y aplica el Motor de Realismo (Paso 5): prescribe inyectar micro-imperfecciones concretas —poros visibles, tono de piel desigual, textura bajo el ojo, imperfección de luz, artefactos de cámara/ruido de sensor— como anclas en el prompt, mínimo 6. Nombra los anti-patrones que delatan la IA (piel de porcelana, luz uniforme, simetría perfecta) y los pasa al negativo. Distingue explícitamente identidad (ya resuelta) de realismo (lo que falla). NO propone regenerar el canon para 'mejorarlo'.",
+      "files": [],
+      "assertions": [
+        {"text": "Distingue que el problema es de realismo/fotorrealismo, NO de identidad ni consistencia (que ya están resueltas)", "type": "qualitative"},
+        {"text": "Aplica el Motor de Realismo: prescribe micro-imperfecciones concretas (poros, tono desigual, textura bajo el ojo, imperfección de luz, ruido/artefactos de cámara) como anclas, mínimo 6", "type": "qualitative"},
+        {"text": "Identifica y manda al negativo los anti-patrones que delatan la IA (piel de porcelana/airbrushed, luz perfectamente uniforme, simetría perfecta, CGI/3D render)", "type": "qualitative"},
+        {"text": "NO recomienda regenerar el canon para arreglar el realismo (eso rompería la identidad ya lograda)", "type": "qualitative"}
+      ]
+    },
+    {
+      "id": 4,
+      "name": "fuera-de-alcance-animacion",
+      "prompt": "Ya tengo la ficha de canon de mi personaje cerrada. Ahora pásame la tabla de motion_strength plano a plano para animarlo en Seedance, y el flujo de lipsync con el audio sincronizado para cada toma.",
+      "expected_output": "La skill reconoce que esto es PIPELINE DE ANIMACIÓN POSTERIOR (fuerza de movimiento, generación de vídeo, lipsync), explícitamente FUERA del alcance de character-canon, que cubre el personaje estático y sus imágenes base. No inventa una tabla de motion_strength ni un flujo de Seedance como si fueran parte de la skill. A lo sumo: confirma que la ficha está lista PARA ese pipeline (boca cerrada en bases, manos fuera de la cara, voice_id bloqueado) y remite el motion/lipsync al pipeline de producción del proyecto. Mantiene su frontera (no es cine-dna ni el motor de animación).",
+      "files": [],
+      "assertions": [
+        {"text": "Reconoce que motion_strength / Seedance / lipsync son pipeline de animación posterior y quedan FUERA del alcance de character-canon", "type": "qualitative"},
+        {"text": "NO fabrica una tabla de motion_strength ni un flujo de lipsync como si fueran entregables propios de la skill", "type": "qualitative"},
+        {"text": "Reconduce: a lo sumo verifica que las imágenes base están listas para animar (boca cerrada, manos fuera del óvalo facial, voice_id bloqueado) y deriva el resto al pipeline del proyecto", "type": "qualitative"},
+        {"text": "Mantiene la frontera de la skill sin asumir trabajo de otra herramienta", "type": "qualitative"}
+      ]
     }
   ]
 }

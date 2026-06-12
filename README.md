@@ -1,18 +1,26 @@
 # character-canon
 
-Sistema para construir y mantener el **canon** de un personaje de cine generado
-con IA — el conjunto de rasgos (rostro, cuerpo, voz, gramática de cámara) que lo
-hacen el mismo personaje en todos los planos de una producción.
+**v1.2**
 
-No resuelve "crear un personaje". Resuelve el problema difícil: que ese
-personaje siga siendo **exactamente el mismo** plano tras plano.
+Sistema para construir y mantener el **canon** de un personaje generado con IA —
+el conjunto de rasgos (rostro, cuerpo, piel, voz, gramática de cámara) que lo
+hacen el mismo personaje, y una persona creíble, en todos los planos de una
+producción.
+
+Resuelve dos problemas difíciles a la vez: que el personaje siga siendo
+**exactamente el mismo** plano tras plano (identidad), y que **parezca real** y
+no un render (fotorrealismo, vía el Motor de Realismo).
+
+Es **universal** (cine IA, podcast/avatar, UGC) y **tool-agnóstica** (cualquier
+modelo de imagen o de voz). NO cubre el pipeline de animación posterior
+(fuerza de movimiento, lipsync, generación de vídeo, montaje).
 
 ## Contenido
 
-- `SKILL.md` — el método completo, en 6 pasos.
+- `SKILL.md` — el método completo, en 10 pasos (incluye Motor de Realismo y perfiles de contexto).
 - `plantilla-personaje.json` — plantilla en blanco para un personaje nuevo.
 - `caso-deriva-identidad.md` — el caso real de diagnóstico que originó el método.
-- `validate.py` — validador de fichas: comprueba el checklist del Paso 5 sin ojo humano.
+- `validate.py` — validador de fichas: comprueba el checklist del Paso 9 sin ojo humano.
 - `evals/` — casos de prueba del comportamiento de la skill.
 
 ## Instalación en Claude Code
@@ -39,6 +47,9 @@ disparan:
 - **Fijar el estilo visual global del proyecto** (look, grano, paleta de toda la
   pieza) → eso es la biblia visual / `cine-dna`. Aquí solo entra la gramática de
   cámara que pertenece a ESE personaje (su lente, su luz).
+- **Animar el personaje** (fuerza de movimiento, lipsync, generación de vídeo,
+  montaje) → eso es el pipeline de producción de tu proyecto. character-canon
+  prepara y congela el personaje estático; no lo mueve.
 
 ## Uso rápido
 

@@ -2,7 +2,7 @@
 """
 validate.py — validador de fichas character-canon.
 
-Comprueba, sin ojo humano, el checklist del Paso 5 de SKILL.md sobre una ficha
+Comprueba, sin ojo humano, el checklist del Paso 9 de SKILL.md sobre una ficha
 rellenada a partir de plantilla-personaje.json.
 
 Uso:
@@ -128,6 +128,30 @@ def check(data):
         add("FAIL", f"camera_grammar incompleta: falta {', '.join(missing)}.")
     else:
         add("PASS", "camera_grammar define lente, luz y formato.")
+
+    # 5b — Motor de Realismo: realism_anchors >= mínimo (6, o 10 si UGC)
+    VALID_ANCHORS = {
+        "skin_pores", "stray_hairs", "under_eye_texture", "uneven_skin_tone",
+        "fabric_texture", "environmental_noise", "lighting_imperfection",
+        "camera_artifacts", "nail_detail", "jewelry_physics",
+    }
+    profile = get(data, "meta", "context_profile", default="")
+    is_ugc = isinstance(profile, str) and profile.strip().lower() == "ugc"
+    minimum = 10 if is_ugc else 6
+    selected = get(data, "realism_anchors", "selected", default=[])
+    valid_selected = [a for a in selected if a in VALID_ANCHORS]
+    if len(valid_selected) < minimum:
+        add("FAIL", f"realism_anchors.selected tiene {len(valid_selected)} anclas válidas; "
+                    f"el mínimo es {minimum}{' (UGC = 10)' if is_ugc else ''}. Personaje sin Motor de Realismo = aspecto CGI.")
+    else:
+        add("PASS", f"Motor de Realismo: {len(valid_selected)} anclas seleccionadas (mín. {minimum}).")
+    bad = [a for a in selected if a not in VALID_ANCHORS]
+    if bad:
+        add("WARN", f"realism_anchors.selected con claves desconocidas: {', '.join(map(str, bad))}.")
+
+    # 5c — context_profile declarado
+    if is_placeholder(profile) or profile.strip().lower() not in ("cinema", "podcast", "ugc"):
+        add("WARN", "meta.context_profile sin fijar a cinema|podcast|ugc — define cámara y realismo por contexto.")
 
     # 6 — voice_lock bloqueado si el personaje habla
     voice = get(data, "voice_lock", default={})
